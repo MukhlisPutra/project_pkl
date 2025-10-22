@@ -16,23 +16,39 @@ class Pendaftaran extends Model
         'status',
     ];
 
+    /**
+     * Relasi ke tabel PaketTravel
+     * (Setiap pendaftaran hanya untuk satu paket)
+     */
     public function paketTravel()
     {
         return $this->belongsTo(PaketTravel::class, 'paket_travel_id');
     }
 
-    public function pembayaran()
+    /**
+     * Relasi ke tabel User
+     * (Setiap pendaftaran dimiliki oleh satu user)
+     */
+    public function user()
     {
-        return $this->hasOne(Pembayaran::class, 'pendaftaran_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Relasi ke tabel Transaksi
+     * (Satu pendaftaran bisa memiliki banyak transaksi)
+     */
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class, 'pendaftaran_id');
     }
 
-    public function user()
+    /**
+     * Relasi ke tabel Pembayaran (jika digunakan)
+     * (Satu pendaftaran bisa punya satu data pembayaran)
+     */
+    public function pembayaran()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Pembayaran::class, 'pendaftaran_id');
     }
 }

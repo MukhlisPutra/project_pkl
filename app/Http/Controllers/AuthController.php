@@ -82,7 +82,7 @@ class AuthController extends Controller
 
         // ✅ Simpan user baru dengan role default "jamaah"
         $user = User::create([
-            'nama' => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'no_hp' => $request->no_hp,

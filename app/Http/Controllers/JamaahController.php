@@ -8,17 +8,18 @@ use Illuminate\Support\Facades\Hash;
 
 class JamaahController extends Controller
 {
+    // Tambah Jamaah
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'no_hp' => 'required|string|max:20',
             'password' => 'required|string|min:6',
         ]);
 
         User::create([
-            'nama' => $request->nama,
+            'name' => $request->name,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
@@ -28,21 +29,23 @@ class JamaahController extends Controller
         return back()->with('success', 'Jamaah berhasil ditambahkan!');
     }
 
+    // Update Jamaah
     public function update(Request $request, $id)
     {
         $jamaah = User::findOrFail($id);
 
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $jamaah->id,
             'no_hp' => 'required|string|max:20',
         ]);
 
-        $jamaah->update($request->only('nama','email','no_hp'));
+        $jamaah->update($request->only('name', 'email', 'no_hp'));
 
         return back()->with('success', 'Jamaah berhasil diperbarui!');
     }
 
+    // Hapus Jamaah
     public function destroy($id)
     {
         User::findOrFail($id)->delete();

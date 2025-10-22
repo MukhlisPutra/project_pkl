@@ -357,7 +357,7 @@
                             <tbody>
                                 @foreach($jamaah as $j)
                                 <tr>
-                                    <td class="fw-medium">{{ $j->nama }}</td>
+                                    <td class="fw-medium">{{ $j->name }}</td>
                                     <td>{{ $j->email }}</td>
                                     <td>{{ $j->no_hp }}</td>
                                     <td><span class="badge bg-success"><i class="bi bi-check-circle-fill me-1"></i> Aktif</span></td>
@@ -378,13 +378,13 @@
                                             @method('PUT')
                                             <div class="modal-content">
                                                 <div class="modal-header bg-info text-white">
-                                                    <h5 class="modal-title">Edit Jamaah: {{ $j->nama }}</h5>
+                                                    <h5 class="modal-title">Edit Jamaah: {{ $j->name }}</h5>
                                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label class="form-label fw-medium">Nama</label>
-                                                        <input type="text" name="nama" class="form-control" value="{{ $j->nama }}" required>
+                                                        <input type="text" name="name" class="form-control" value="{{ $j->name }}" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label fw-medium">Email</label>
@@ -421,7 +421,7 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label class="form-label fw-medium">Nama</label>
-                                        <input type="text" name="nama" class="form-control" required>
+                                        <input type="text" name="name" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-medium">Email</label>
@@ -463,7 +463,7 @@
                                 @foreach($pendaftaran as $item)
 <tr>
     <td>
-        <span class="fw-medium">{{ $item->user->nama }}</span><br>
+        <span class="fw-medium">{{ $item->user->name }}</span><br>
         <small class="text-muted">{{ $item->user->no_hp }}</small>
     </td>
     <td>{{ $item->paketTravel->nama_paket }}</td>

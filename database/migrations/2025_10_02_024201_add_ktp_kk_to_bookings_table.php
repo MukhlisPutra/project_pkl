@@ -6,18 +6,42 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Jalankan migrasi untuk menambahkan kolom ktp dan kk ke tabel bookings.
+     */
     public function up(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->string('ktp')->nullable()->after('paket');
-            $table->string('kk')->nullable()->after('ktp');
-        });
+        // Pastikan tabel bookings ada sebelum mengubahnya
+        if (Schema::hasTable('bookings')) {
+            Schema::table('bookings', function (Blueprint $table) {
+                // Tambahkan kolom ktp hanya jika belum ada
+                if (!Schema::hasColumn('bookings', 'ktp')) {
+                    $table->string('ktp')->nullable()->after('paket');
+                }
+
+                // Tambahkan kolom kk hanya jika belum ada
+                if (!Schema::hasColumn('bookings', 'kk')) {
+                    $table->string('kk')->nullable()->after('ktp');
+                }
+            });
+        }
     }
 
+    /**
+     * Rollback migrasi: hapus kolom ktp dan kk jika ada.
+     */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn(['ktp', 'kk']);
-        });
+        // Pastikan tabel bookings ada sebelum menghapus kolom
+        if (Schema::hasTable('bookings')) {
+            Schema::table('bookings', function (Blueprint $table) {
+                if (Schema::hasColumn('bookings', 'ktp')) {
+                    $table->dropColumn('ktp');
+                }
+                if (Schema::hasColumn('bookings', 'kk')) {
+                    $table->dropColumn('kk');
+                }
+            });
+        }
     }
 };

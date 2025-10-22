@@ -240,6 +240,52 @@ public function destroyKaryawan($id)
     }
 
     // ========================
+// TAMBAH JAMAAH
+// ========================
+public function storeJamaah(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'no_hp' => 'required|string|max:20',
+        'password' => 'required|string|min:6',
+    ]);
+
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'no_hp' => $request->no_hp,
+        'password' => Hash::make($request->password),
+        'role' => 'jamaah',
+    ]);
+
+    return back()->with('success', 'Data jamaah berhasil ditambahkan!');
+}
+
+// ========================
+// UPDATE JAMAAH
+// ========================
+public function updateJamaah(Request $request, $id)
+{
+    $jamaah = User::findOrFail($id);
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $jamaah->id,
+        'no_hp' => 'required|string|max:20',
+    ]);
+
+    $jamaah->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'no_hp' => $request->no_hp,
+    ]);
+
+    return back()->with('success', 'Data jamaah berhasil diperbarui!');
+}
+
+
+    // ========================
     // UBAH PASSWORD ADMIN
     // ========================
     public function ubahPassword(Request $request)
