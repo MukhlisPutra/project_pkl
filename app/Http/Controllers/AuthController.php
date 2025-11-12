@@ -22,7 +22,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // ✅ Validasi input agar aman
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
@@ -33,7 +32,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // ✅ Cek role dan arahkan ke dashboard yang sesuai
+            // Arahkan berdasarkan role
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->role === 'jamaah') {
@@ -65,7 +64,7 @@ class AuthController extends Controller
      */
     public function showRegisterForm()
     {
-        return view('jamaah.register');
+        return view('auth.register'); // ✅ pastikan file-nya di resources/views/auth/register.blade.php
     }
 
     /**
@@ -76,13 +75,16 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
             'no_hp' => 'required|string|max:20',
         ]);
 
-        // ✅ Simpan user baru dengan role default "jamaah"
         $user = User::create([
+<<<<<<< HEAD
             'name' => $request->name,
+=======
+            'name' => $request->name, // ✅ nama kolom yang benar
+>>>>>>> 961fc8259019e6948cce34e45fc51862ebdc4083
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'no_hp' => $request->no_hp,
@@ -91,6 +93,6 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('jamaah.dashboard');
+        return redirect()->route('jamaah.dashboard')->with('success', 'Registrasi berhasil!');
     }
 }

@@ -34,11 +34,15 @@ class Pendaftaran extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+<<<<<<< HEAD
     /**
      * Relasi ke tabel Transaksi
      * (Satu pendaftaran bisa memiliki banyak transaksi)
      */
     public function transaksi()
+=======
+    public function transaksis()
+>>>>>>> 961fc8259019e6948cce34e45fc51862ebdc4083
     {
         return $this->hasMany(Transaksi::class, 'pendaftaran_id');
     }

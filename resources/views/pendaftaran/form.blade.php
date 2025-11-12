@@ -58,66 +58,71 @@
 
     {{-- Form Booking --}}
     <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
-  @csrf
+      @csrf
 
-  {{-- Hidden user & paket --}}
-  <input type="hidden" name="user_id" value="{{ $user->id }}">
-  <input type="hidden" name="paket_travel_id" value="{{ $paket->id }}">
-  <input type="hidden" name="status" value="menunggu">
+      {{-- Hidden user & paket --}}
+      <input type="hidden" name="user_id" value="{{ $user->id }}">
+      <input type="hidden" name="paket_travel_id" value="{{ $paket->id }}">
+      <input type="hidden" name="status" value="menunggu">
 
-  {{-- Nama otomatis --}}
-  <div class="mb-3">
-    <label for="nama" class="form-label"><i class="fas fa-user"></i>Nama Lengkap</label>
-    <input type="text" class="form-control" id="nama" name="nama" value="{{ $user->nama }}" readonly>
-  </div>
+      {{-- Nama otomatis dari database --}}
+      <div class="mb-3">
+        <label for="nama" class="form-label"><i class="fas fa-user"></i>Nama Lengkap</label>
+        <input type="text" class="form-control" id="nama" name="nama" 
+               value="{{ $user->name }}" readonly>
+      </div>
 
-  {{-- Nomor HP --}}
-  <div class="mb-3">
-    <label for="hp" class="form-label"><i class="fas fa-phone"></i>No. HP / WA Aktif</label>
-    <input type="tel" class="form-control" id="hp" name="hp" value="{{ $user->no_hp }}" readonly>
-  </div>
+      {{-- Nomor HP --}}
+      <div class="mb-3">
+        <label for="hp" class="form-label"><i class="fas fa-phone"></i>No. HP / WA Aktif</label>
+        <input type="tel" class="form-control" id="hp" name="hp" 
+               value="{{ $user->no_hp }}" readonly>
+      </div>
 
-  {{-- Paket --}}
-  <div class="mb-3">
-    <label for="paket" class="form-label"><i class="fas fa-box"></i>Paket Travel</label>
-    <input type="text" class="form-control" id="paket" value="{{ $paket->nama_paket }} (Rp {{ number_format($paket->harga, 0, ',', '.') }})" readonly>
-  </div>
+      {{-- Paket --}}
+      <div class="mb-3">
+        <label for="paket" class="form-label"><i class="fas fa-box"></i>Paket Travel</label>
+        <input type="text" class="form-control" id="paket" 
+               value="{{ $paket->nama_paket }} (Rp {{ number_format($paket->harga, 0, ',', '.') }})" readonly>
+      </div>
 
-  {{-- Upload KTP --}}
-  <div class="mb-3">
-    <label for="ktp" class="form-label"><i class="fas fa-id-card"></i> Upload KTP</label>
-    <input type="file" class="form-control @error('ktp') is-invalid @enderror" id="ktp" name="ktp" accept="image/*" required>
-    @error('ktp')
-      <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-  </div>
+      {{-- Upload KTP --}}
+      <div class="mb-3">
+        <label for="ktp" class="form-label"><i class="fas fa-id-card"></i> Upload KTP</label>
+        <input type="file" class="form-control @error('ktp') is-invalid @enderror" 
+               id="ktp" name="ktp" accept="image/*" required>
+        @error('ktp')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
 
-  {{-- Upload KK --}}
-  <div class="mb-3">
-    <label for="kk" class="form-label"><i class="fas fa-users"></i> Upload Kartu Keluarga</label>
-    <input type="file" class="form-control @error('kk') is-invalid @enderror" id="kk" name="kk" accept="image/*" required>
-    @error('kk')
-      <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-  </div>
+      {{-- Upload KK --}}
+      <div class="mb-3">
+        <label for="kk" class="form-label"><i class="fas fa-users"></i> Upload Kartu Keluarga</label>
+        <input type="file" class="form-control @error('kk') is-invalid @enderror" 
+               id="kk" name="kk" accept="image/*" required>
+        @error('kk')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
 
+      {{-- Catatan --}}
+      <div class="mb-3">
+        <label for="catatan" class="form-label"><i class="fas fa-comment-dots"></i>Catatan Tambahan</label>
+        <textarea class="form-control @error('catatan') is-invalid @enderror" 
+                  id="catatan" name="catatan" rows="3">{{ old('catatan') }}</textarea>
+        @error('catatan')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
 
-  {{-- Catatan --}}
-  <div class="mb-3">
-    <label for="catatan" class="form-label"><i class="fas fa-comment-dots"></i>Catatan Tambahan</label>
-    <textarea class="form-control @error('catatan') is-invalid @enderror" id="catatan" name="catatan" rows="3">{{ old('catatan') }}</textarea>
-    @error('catatan')
-      <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-  </div>
-
-  {{-- Tombol --}}
-  <div class="d-grid">
-    <button type="submit" class="btn btn-success btn-lg">
-      <i class="fas fa-paper-plane me-2"></i>Kirim Booking Sekarang
-    </button>
-  </div>
-</form>
+      {{-- Tombol --}}
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success btn-lg">
+          <i class="fas fa-paper-plane me-2"></i>Kirim Booking Sekarang
+        </button>
+      </div>
+    </form>
   </div>
 </div>
 

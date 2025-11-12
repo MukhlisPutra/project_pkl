@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
+        'tanggal',
         'user_id',
         'pendaftaran_id',
+<<<<<<< HEAD
         'jumlah',
+=======
+        'total',
+        'metode_pembayaran',
+        'keterangan',
+>>>>>>> 961fc8259019e6948cce34e45fc51862ebdc4083
         'status',
         'jenis_pembayaran',
     ];
@@ -26,8 +30,9 @@ class Transaksi extends Model
     // Relasi ke pendaftaran
     public function pendaftaran()
     {
-        return $this->belongsTo(Pendaftaran::class);
+        return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id');
     }
+<<<<<<< HEAD
 
     // Relasi ke paket travel melalui pendaftaran
     public function paketTravel()
@@ -41,4 +46,6 @@ class Transaksi extends Model
             'paket_travel_id'   // Foreign key di tabel pendaftarans
         );
     }
+=======
+>>>>>>> 961fc8259019e6948cce34e45fc51862ebdc4083
 }

@@ -313,31 +313,59 @@
 </section>
 
 <!-- Testimoni -->
-<section id="testimoni" class="py-5" style="background: linear-gradient(to bottom, #f0f9ff, #ffffff);">
+<section id="testimoni" class="py-5 overflow-hidden" style="background: linear-gradient(to bottom, #f0f9ff, #ffffff);">
   <div class="container text-center">
     <h2 class="mb-5 text-primary fw-bold" data-aos="fade-up">💬 Testimoni Jamaah</h2>
+  </div>
 
-    <div class="row justify-content-center g-4">
-      @foreach($testimonis as $t)
-      <div class="col-md-4 col-sm-6">
-        <div class="card border-0 shadow-sm p-4 h-100 rounded-4" 
-             style="background-color: #e8f7ff; transition: transform 0.3s;"
-             onmouseover="this.style.transform='translateY(-5px)';" 
-             onmouseout="this.style.transform='translateY(0)';">
-
-          <!-- ✅ Perbaikan di sini -->
-          <img src="{{ asset($t->foto ?? 'https://cdn-icons-png.flaticon.com/512/847/847969.png') }}" 
-               alt="{{ $t->nama }}" class="rounded-circle shadow mx-auto mb-3" width="90" height="90">
-
-          <p class="fst-italic">"{{ $t->pesan }}"</p>
-          <h5 class="fw-semibold text-primary mt-3">🌟 {{ $t->nama }} - {{ $t->kota }}</h5>
-        </div>
+  <div class="testimoni-scroll-container">
+    <div class="testimoni-scroll-content">
+      
+      <div class="testimoni-card">
+        <p class="fst-italic">"Pelayanan luar biasa, ustadz/ustadzahnya sabar, dan akomodasi sangat nyaman. Pengalaman umroh yang tak terlupakan!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Siti Aisyah - Jakarta</h5>
       </div>
-      @endforeach
+      <div class="testimoni-card">
+        <p class="fst-italic">"Harga terjangkau dengan fasilitas bintang lima. Semua berjalan lancar dari awal hingga akhir. Sangat merekomendasikan travel ini."</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Budi Santoso - Surabaya</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Alhamdulillah, bisa beribadah dengan khusyuk. Timnya sangat membantu dan komunikatif. Terima kasih banyak!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Fatimah Az-Zahra - Bandung</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Rencana perjalanan matang, tidak ada kendala berarti. Semuanya on-time dan profesional. Terbaik!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Ahmad Yani - Yogyakarta</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Sangat puas dengan bimbingan ibadah yang intensif. Semoga bisa berangkat lagi tahun depan!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Kartika Dewi - Medan</h5>
+      </div>
+      
+      <div class="testimoni-card">
+        <p class="fst-italic">"Pelayanan luar biasa, ustadz/ustadzahnya sabar, dan akomodasi sangat nyaman. Pengalaman umroh yang tak terlupakan!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Siti Aisyah - Jakarta</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Harga terjangkau dengan fasilitas bintang lima. Semua berjalan lancar dari awal hingga akhir. Sangat merekomendasikan travel ini."</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Budi Santoso - Surabaya</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Alhamdulillah, bisa beribadah dengan khusyuk. Timnya sangat membantu dan komunikatif. Terima kasih banyak!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Fatimah Az-Zahra - Bandung</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Rencana perjalanan matang, tidak ada kendala berarti. Semuanya on-time dan profesional. Terbaik!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Ahmad Yani - Yogyakarta</h5>
+      </div>
+      <div class="testimoni-card">
+        <p class="fst-italic">"Sangat puas dengan bimbingan ibadah yang intensif. Semoga bisa berangkat lagi tahun depan!"</p>
+        <h5 class="fw-semibold text-primary mt-3">🌟 Kartika Dewi - Medan</h5>
+      </div>
+
     </div>
   </div>
 </section>
-
 
 
 

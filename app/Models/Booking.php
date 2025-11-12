@@ -9,13 +9,13 @@ class Booking extends Model
 {
     use HasFactory;
 
+    // Kolom yang bisa diisi secara massal
     protected $fillable = [
         'user_id',
-        'paket_id',
+        'paket_id', // gunakan ini sebagai foreign key paket
         'nama',
         'hp',
         'email',
-        'paket',
         'ktp',
         'kk',
         'bukti',
@@ -23,22 +23,27 @@ class Booking extends Model
         'status',
     ];
 
-    // Relasi ke user
+    /**
+     * Relasi ke User
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relasi ke paket travel
+    /**
+     * Relasi ke PaketTravel
+     */
     public function paketTravel()
-{
-    return $this->belongsTo(PaketTravel::class, 'paket_id');
-}
+    {
+        return $this->belongsTo(PaketTravel::class, 'paket_id'); // pastikan pakai kolom paket_id
+    }
 
-public function transaksi()
-{
-    return $this->hasMany(Transaksi::class, 'booking_id');
-}
-
-
+    /**
+     * Relasi ke Transaksi
+     */
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'booking_id');
+    }
 }

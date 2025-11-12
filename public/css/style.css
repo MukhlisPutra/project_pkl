@@ -454,39 +454,75 @@ body {
 
 
 /* ================== TESTIMONI ================== */
-.testimoni-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+
+/* ================== TESTIMONI ================== */
+
+/* Container utama untuk scrolling */
+.testimoni-scroll-container {
+    /* Lebar penuh dan pastikan tidak ada scrollbar bawaan */
+    width: 100%;
+    overflow: hidden; 
 }
 
-.testimoni-box {
-  background-color: #f9f9f9;
-  border-left: 5px solid #000000;
-  padding: 1.5rem;
-  max-width: 350px;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+/* Konten yang akan dianimasikan */
+.testimoni-scroll-content {
+    display: flex; /* Memastikan semua kartu berjajar horizontal */
+    width: max-content; /* Lebar konten menyesuaikan total lebar semua kartu */
+    padding: 1rem 0;
+    
+    /* ANIMASI UTAMA: Geser ke kanan tak terbatas */
+    animation: scroll-right 40s linear infinite; /* Jaga durasi */
+
+    /* ✅ PERUBAHAN: Hapus 'transform: translateX(-50%);' di sini. */
+    /* Posisi awal sudah diatur di @keyframes 0% */
 }
 
-.testimoni-box:hover {
-  transform: translateY(-5px);
+/* Menghentikan animasi saat mouse diarahkan (opsional) */
+.testimoni-scroll-content:hover {
+    animation-play-state: paused;
 }
 
-.testimoni-box p {
-  font-style: italic;
-  margin-bottom: 0.5rem;
-  color: #333;
+/* Gaya untuk setiap kartu testimoni */
+.testimoni-card {
+    background-color: #e8f7ff; 
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    
+    /* ✅ PERUBAHAN: Sesuaikan lebar minimum agar tidak terlalu lebar/gepeng */
+    min-width: 280px; /* Diubah dari 300px, atau coba 250px jika masih terlalu lebar */
+    max-width: 350px; /* Batasi lebar maksimum */
+    flex-shrink: 0; /* Penting untuk menjaga ukuran kartu dalam flex container */
+
+    margin-right: 1.5rem; 
+    transition: transform 0.3s ease;
 }
 
-.testimoni-box h4 {
-  margin: 0;
-  font-weight: bold;
-  color: #000000;
+.testimoni-card:hover {
+    transform: translateY(-5px);
+}
+
+.testimoni-card p {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.testimoni-card h5 {
+    margin: 0;
+    font-weight: bold;
+    color: #007bff; 
+}
+
+/* KEYFRAMES untuk animasi scrolling ke kanan */
+/* Dimulai dari -50% (ujung kiri duplikat) ke 0% (posisi awal) */
+@keyframes scroll-right {
+    0% {
+        transform: translateX(-50%); /* Dimulai dari ujung duplikasi konten */
+    }
+    100% {
+        transform: translateX(0); /* Bergerak ke kanan hingga kembali ke posisi Set 1 */
+    }
 }
 
 /* ================== LOGO ROW ================== */

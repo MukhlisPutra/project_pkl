@@ -19,16 +19,36 @@ class JamaahDashboardController extends Controller
             ->latest()
             ->first();
 
-        // Hitung total pembayaran dari semua transaksi berdasarkan pendaftaran
+        // Inisialisasi nilai default agar tidak undefined
+        $totalLunas = 0;
+        $totalPending = 0;
+        $totalDP = 0;
+        $totalTabungan = 0;
         $totalPembayaran = 0;
-        if ($pendaftaran) {
-           $totalPembayaran = Transaksi::where('user_id', $user->id)
-    ->where('status', 'Lunas')
-    ->sum('jumlah');
 
+        // Kalau user punya pendaftaran, baru hitung transaksi
+        if ($pendaftaran) {
+            $totalLunas = Transaksi::where('user_id', $user->id)
+                ->where('status', 'acc')
+                ->sum('total');
+
+            $totalPending = Transaksi::where('user_id', $user->id)
+                ->where('status', 'pending')
+                ->sum('total');
+
+            $totalDP = Transaksi::where('user_id', $user->id)
+                ->where('keterangan', 'like', '%DP%')
+                ->sum('total');
+
+            $totalTabungan = Transaksi::where('user_id', $user->id)
+                ->where('keterangan', 'like', '%Tabungan%')
+                ->sum('total');
+
+            // Hitung total keseluruhan
+            $totalPembayaran = $totalLunas + $totalDP + $totalTabungan;
         }
 
-        // Ambil semua riwayat pendaftaran jamaah
+        // Ambil semua riwayat pendaftaran
         $riwayat = Pendaftaran::with('paketTravel')
             ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
@@ -41,17 +61,12 @@ class JamaahDashboardController extends Controller
             'user',
             'pendaftaran',
             'totalPembayaran',
+            'totalLunas',
+            'totalPending',
+            'totalDP',
+            'totalTabungan',
             'riwayat',
             'pakets'
         ));
-    }
-
-    // Detail transaksi
-    public function showTransaksi($id)
-    {
-        $transaksi = Transaksi::with(['pendaftaran.paketTravel'])
-            ->findOrFail($id);
-
-        return view('jamaah.transaksi-detail', compact('transaksi'));
     }
 }
