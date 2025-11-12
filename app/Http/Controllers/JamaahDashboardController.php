@@ -26,26 +26,21 @@ class JamaahDashboardController extends Controller
         $totalTabungan = 0;
         $totalPembayaran = 0;
 
-        // Kalau user punya pendaftaran, baru hitung transaksi
         if ($pendaftaran) {
-            $totalLunas = Transaksi::where('user_id', $user->id)
-                ->where('status', 'acc')
-                ->sum('total');
-
-            $totalPending = Transaksi::where('user_id', $user->id)
-                ->where('status', 'pending')
-                ->sum('total');
-
-            $totalDP = Transaksi::where('user_id', $user->id)
-                ->where('keterangan', 'like', '%DP%')
-                ->sum('total');
-
-            $totalTabungan = Transaksi::where('user_id', $user->id)
-                ->where('keterangan', 'like', '%Tabungan%')
-                ->sum('total');
+            // Ambil semua transaksi yang terkait pendaftaran ini dan tidak batal
+            $transaksis = Transaksi::where('user_id', $user->id)
+                ->where('pendaftaran_id', $pendaftaran->id)
+                ->where('status', '!=', 'batal')
+                ->get();
 
             // Hitung total keseluruhan
-            $totalPembayaran = $totalLunas + $totalDP + $totalTabungan;
+            $totalPembayaran = $transaksis->sum('total');
+
+            // Opsional: pisahkan kategori untuk laporan detail
+            $totalLunas = $transaksis->where('status', 'acc')->sum('total');
+            $totalPending = $transaksis->where('status', 'pending')->sum('total');
+            $totalDP = $transaksis->filter(fn($t) => str_contains($t->keterangan, 'DP'))->sum('total');
+            $totalTabungan = $transaksis->filter(fn($t) => str_contains($t->keterangan, 'Tabungan'))->sum('total');
         }
 
         // Ambil semua riwayat pendaftaran
@@ -68,5 +63,22 @@ class JamaahDashboardController extends Controller
             'riwayat',
             'pakets'
         ));
+    }
+
+    public function showTransaksi($id)
+    {
+        $user = Auth::user();
+
+        $pendaftaran = Pendaftaran::with('paketTravel')
+            ->where('user_id', $user->id)
+            ->findOrFail($id);
+
+        // Ambil transaksi khusus untuk pendaftaran ini
+        $transaksi = Transaksi::where('user_id', $user->id)
+            ->where('pendaftaran_id', $id)
+            ->where('status', '!=', 'batal') // optional, abaikan transaksi batal
+            ->get();
+
+        return view('jamaah.transaksi_show', compact('pendaftaran', 'transaksi'));
     }
 }
