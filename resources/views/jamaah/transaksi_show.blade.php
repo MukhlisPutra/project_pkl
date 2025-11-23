@@ -280,7 +280,7 @@
                 @php
                     // bila $totalTagihan tidak dikirim dari controller, hitung fallback:
                     $totalTagihan = $totalTagihan ?? ($pendaftaran->paketTravel->harga ?? 0);
-                    $totalPembayaran = $totalPembayaran ?? ($transaksi->where('status', 'acc')->sum('total') ?? 0); // Hanya hitung yg ACC
+                    $totalPembayaran = $totalPembayaran ?? ($transaksi->where('status', 'acc')->sum('jumlah') ?? 0); // Hanya hitung yg ACC
                     $sisaTagihan = $totalTagihan - $totalPembayaran;
                 @endphp
 

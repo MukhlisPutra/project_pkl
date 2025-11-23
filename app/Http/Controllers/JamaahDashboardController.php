@@ -34,7 +34,7 @@ class JamaahDashboardController extends Controller
                 ->get();
 
             // Hitung total keseluruhan
-            $totalPembayaran = $transaksis->sum('total');
+            $totalPembayaran = $transaksis->sum('jumlah');
 
             // Opsional: pisahkan kategori untuk laporan detail
             $totalLunas = $transaksis->where('status', 'acc')->sum('total');

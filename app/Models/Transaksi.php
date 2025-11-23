@@ -10,13 +10,9 @@ class Transaksi extends Model
         'tanggal',
         'user_id',
         'pendaftaran_id',
-<<<<<<< HEAD
-        'jumlah',
-=======
-        'total',
+        'jumlah',               // versi terbaru yang benar
         'metode_pembayaran',
         'keterangan',
->>>>>>> 961fc8259019e6948cce34e45fc51862ebdc4083
         'status',
         'jenis_pembayaran',
     ];
@@ -32,7 +28,6 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id');
     }
-<<<<<<< HEAD
 
     // Relasi ke paket travel melalui pendaftaran
     public function paketTravel()
@@ -46,6 +41,4 @@ class Transaksi extends Model
             'paket_travel_id'   // Foreign key di tabel pendaftarans
         );
     }
-=======
->>>>>>> 961fc8259019e6948cce34e45fc51862ebdc4083
 }

@@ -210,7 +210,7 @@
             </button>
         </form>
         <div class="text-center mt-3">
-            <a href="{{ url()->previous() }}" class="btn-kembali-minimalis">
+            <a href="{{ route('jamaah.dashboard') }}" class="btn-kembali-minimalis">
                 <i class="fas fa-arrow-left me-1"></i> Kembali ke Dashboard
             </a>
         </div>

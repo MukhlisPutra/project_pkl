@@ -33,10 +33,10 @@ class AdminController extends Controller
         $agents = Agent::all();
         $transaksis = Transaksi::with(['user', 'pendaftaran.paketTravel'])->latest()->get();
         $totalPembayaran = Transaksi::where('status', 'acc')->sum('jumlah');
-        $totalLunas = Transaksi::where('metode_pembayaran', 'Lunas')->sum('total');
-$totalTabungan = Transaksi::where('metode_pembayaran', 'Tabungan')->sum('total');
-$totalDP = Transaksi::where('metode_pembayaran', 'DP')->sum('total');
-$totalPendingTransaksi = Transaksi::where('status', 'pending')->sum('total');
+        $totalLunas = Transaksi::where('metode_pembayaran', 'Lunas')->sum('jumlah');
+$totalTabungan = Transaksi::where('metode_pembayaran', 'Tabungan')->sum('jumlah');
+$totalDP = Transaksi::where('metode_pembayaran', 'DP')->sum('jumlah');
+$totalPendingTransaksi = Transaksi::where('status', 'pending')->sum('jumlah');
 
 
     $jamaahList = User::select('id', 'name')

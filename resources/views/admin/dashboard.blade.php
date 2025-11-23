@@ -978,7 +978,8 @@
                                             ? $t->pendaftaran->paketTravel->nama_paket 
                                             : 'Paket Umrah' }}
                                     </td>
-                                    <td class="text-success fw-semibold">Rp {{ number_format($t->total ?? 0, 0, ',', '.') }}</td>
+                                    <td class="text-success fw-semibold">Rp {{ number_format($t->jumlah ?? 0, 0, ',', '.') }}</td>
+
                                     <td>
                                         @if (($t->status ?? 'pending') == 'pending')
                                             <span class="badge bg-warning text-dark py-1 px-2 fw-medium">Pending</span>
@@ -1154,7 +1155,7 @@
                                     {{-- Jumlah Pembayaran --}}
                                     <div class="mb-3">
                                         <label class="form-label fw-medium">Jumlah Pembayaran (Rp) *</label>
-                                        <input type="number" name="total" class="form-control" required min="1">
+                                        <input type="number" name="jumlah" class="form-control" required min="1">
                                     </div>
 
                                     {{-- Metode Pembayaran --}}

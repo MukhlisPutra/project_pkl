@@ -351,7 +351,7 @@
     // 💰 Hitung total bayar dari transaksi yang sudah acc
     $totalBayar = $pendaftaran->transaksis()
         ->where('status', 'acc')
-        ->sum('total');
+        ->sum('jumlah');
 
     $total = max(0, $hargaPaket);
     $sisa  = max(0, $total - $totalBayar);
